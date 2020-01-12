@@ -1,0 +1,5 @@
+/entrypoints/*
+!/entrypoints/development.sh
+/scripts/*
+!/scripts/development_www.php
+!/scripts/development_www.sh
