@@ -5,6 +5,8 @@
 
 Required:
 
+Synology: Container mit hoher Priorität ausführen = true
+
 ```bash
 --cap-add=SYS_PTRACE
 ```
