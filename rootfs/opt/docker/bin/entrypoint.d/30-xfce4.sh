@@ -3,7 +3,7 @@
 # Fix special user permissions
 APPLICATION_USER=${APPLICATION_USER:-application}
 
-if ! -f /opt/docker/entrypoint.lock; then
+if [[ ! -f /opt/docker/entrypoint.lock ]]; then
   echo 'XFCE_PANEL_MIGRATE_DEFAULT=1' > /etc/environment
 
   sudo rsync -a --relative /root/./.config/xfce4 /home/${APPLICATION_USER}/

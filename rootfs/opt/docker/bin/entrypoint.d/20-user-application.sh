@@ -7,7 +7,7 @@ APPLICATION_USER=${APPLICATION_USER:-application}
 APPLICATION_GROUP=${APPLICATION_USER:-application}
 PASSWORD=${PASSWORD:-Admin123!}
 
-if ! -f /opt/docker/entrypoint.lock; then
+if [[ ! -f /opt/docker/entrypoint.lock ]]; then
   # Add group
   groupadd -g "$APPLICATION_GID" "$APPLICATION_GROUP"
 
@@ -16,6 +16,9 @@ if ! -f /opt/docker/entrypoint.lock; then
 
   # Assign user to group
   usermod -g "$APPLICATION_GROUP" "$APPLICATION_USER"
+fi
+
+if [[ ! -f /opt/docker/entrypoint.lock ]]; then
   usermod -aG sudo "$APPLICATION_USER"
 
   # Set password
