@@ -41,6 +41,7 @@ RUN set -x && \
   /opt/docker/bin/bootstrap.sh
 
 EXPOSE 4000
+EXPOSE 4011-4999
 WORKDIR /root
 ENTRYPOINT ["/entrypoint"]
 CMD ["supervisord"]

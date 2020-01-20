@@ -1,0 +1,20 @@
+version: '3.5'
+
+services:
+  desktop:
+    #build: .
+    image: cyb10101/desktop:latest
+
+    volumes:
+      - ~/projects/docker_desktop/storage/downloads:/home/application/Downloads
+      - ~/projects/docker_desktop/storage/.mozilla:/home/application/.mozilla
+      - ~/projects/docker_desktop/storage/jd2:/home/application/jd2
+
+    ports:
+      - 4001:4000
+      - 4467:4467
+    environment:
+      - PASSWORD=Admin123!
+    cap_add:
+      - SYS_PTRACE
+    working_dir: /home/application
