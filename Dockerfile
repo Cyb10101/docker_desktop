@@ -21,6 +21,7 @@ RUN apt-get clean && apt-get update && \
         x11vnc xvfb net-tools \
         firefox firefox-locale-de && \
     apt-get remove -y pm-utils xscreensaver* && \
+    echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     echo "${TIMEZONE}" > /etc/timezone && \
     update-locale LANG="${LANGUAGE}.UTF-8" && \
     apt-get -y autoclean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
