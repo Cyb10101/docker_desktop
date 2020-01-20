@@ -17,7 +17,7 @@ RUN apt-get clean && apt-get update && \
     apt-get install -y \
         curl git rsync sudo supervisor vim \
         locales language-pack-de \
-        xfce4 xfce4-terminal xfce4-goodies \
+        xfce4 xfce4-terminal xfce4-goodies conky-all \
         x11vnc xvfb net-tools \
         firefox firefox-locale-de && \
     apt-get remove -y pm-utils xscreensaver* && \

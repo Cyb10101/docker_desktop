@@ -27,6 +27,8 @@ if [[ ! -f /opt/docker/entrypoint.lock ]]; then
   # Copy files
   cp /root/.shell-methods.sh /home/$APPLICATION_USER/
   cp /root/.bashrc /home/$APPLICATION_USER/
+  rsync -a --relative /root/./.config/autostart /home/${APPLICATION_USER}/
+  rsync -a --relative /root/./.config/conky /home/${APPLICATION_USER}/
 
   chown -R "$APPLICATION_USER":"$APPLICATION_GROUP" /home/$APPLICATION_USER
 fi
