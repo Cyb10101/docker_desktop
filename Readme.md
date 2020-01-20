@@ -17,6 +17,7 @@ Optional environment variables:
 PASSWORD="Admin123!"
 DISPLAY_WIDTH=1280
 DISPLAY_HEIGHT=900
+NX_PORT=4001
 ```
 
 Example mounts:

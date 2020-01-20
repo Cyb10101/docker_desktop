@@ -3,8 +3,6 @@ FROM ubuntu
 ENV DEBIAN_FRONTEND=noninteractive \
     TIMEZONE="Europe/Berlin" \
     LANGUAGE="de_DE" \
-    DISPLAY_WIDTH=1280 \
-    DISPLAY_HEIGHT=768 \
     LOG_STDOUT="" \
     LOG_STDERR="" \
     APPLICATION_UID=1000 \
