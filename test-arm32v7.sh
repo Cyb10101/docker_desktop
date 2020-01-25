@@ -22,7 +22,6 @@ docker run --rm -d --name ${dockerContainer} \
   --cap-add=SYS_PTRACE \
   -v /home/${USER}/projects/docker_desktop/storage/downloads:/home/application/Downloads \
   -v /home/${USER}/projects/docker_desktop/storage/.mozilla:/home/application/.mozilla \
-  -v /home/${USER}/projects/docker_desktop/storage/jd2:/home/application/jd2 \
   ${dockerImage} && \
 
 docker exec -ti ${dockerContainer} bash
