@@ -15,29 +15,18 @@ ENV DEBIAN_FRONTEND=noninteractive \
     APPLICATION_GROUP="application" \
     PASSWORD="Admin123!"
 
-RUN apt-get clean && apt-get update
-
-RUN apt-get install -y curl
-RUN apt-get install -y git
-RUN apt-get install -y rsync
-RUN apt-get install -y sudo
-RUN apt-get install -y supervisor
-RUN apt-get install -y vim
-RUN apt-get install -y locales
-RUN apt-get install -y language-pack-de
-RUN apt-get install -y xfce4
-RUN apt-get install -y xfce4-terminal
-RUN apt-get install -y xfce4-goodies
-RUN apt-get install -y conky-all
-RUN apt-get install -y x11vnc
-RUN apt-get install -y xvfb
-RUN apt-get install -y net-tools
-RUN apt-get install -y firefox firefox-locale-de
-RUN apt-get remove -y pm-utils xscreensaver*
-RUN echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-RUN echo "${TIMEZONE}" > /etc/timezone
-RUN update-locale LANG="${LANGUAGE}.UTF-8"
-RUN apt-get -y autoclean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
+RUN apt-get clean && apt-get update && \
+    apt-get install -y \
+        curl git rsync sudo supervisor vim \
+        locales language-pack-de \
+        xfce4 xfce4-terminal xfce4-goodies conky-all \
+        x11vnc xvfb net-tools \
+        firefox firefox-locale-de && \
+    apt-get remove -y pm-utils xscreensaver* && \
+    echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    echo "${TIMEZONE}" > /etc/timezone && \
+    update-locale LANG="${LANGUAGE}.UTF-8" && \
+    apt-get -y autoclean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
 
 ENV NOMACHINE_BUILD="6.9" \
     NOMACHINE_VERSION="6.9.2_3_armhf" \
