@@ -28,11 +28,12 @@ RUN apt-get clean && apt-get update && \
     update-locale LANG="${LANGUAGE}.UTF-8" && \
     apt-get -y autoclean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
 
-ENV NOMACHINE_BUILD="6.9" \
+ENV NOMACHINE_OS="Arm" \
+    NOMACHINE_BUILD="6.9" \
     NOMACHINE_VERSION="6.9.2_3_armhf" \
     NOMACHINE_MD5="d894085c5ffd0cd1f27dba7a56ce9457"
 
-RUN curl -fSL "https://download.nomachine.com/download/${NOMACHINE_BUILD}/Arm/nomachine_${NOMACHINE_VERSION}.deb" -o nomachine.deb && \
+RUN curl -fSL "https://download.nomachine.com/download/${NOMACHINE_BUILD}/${NOMACHINE_OS}/nomachine_${NOMACHINE_VERSION}.deb" -o nomachine.deb && \
     echo "${NOMACHINE_MD5} *nomachine.deb" | md5sum -c - && \
     dpkg -i nomachine.deb
 
