@@ -1,5 +1,8 @@
+FROM multiarch/qemu-user-static:x86_64-arm as qemu
+
 # Main
-FROM ubuntu
+FROM arm32v7/ubuntu
+COPY --from=qemu /usr/bin/qemu-arm-static /usr/bin/
 
 ENV DEBIAN_FRONTEND=noninteractive \
     TIMEZONE="Europe/Berlin" \
@@ -25,10 +28,10 @@ RUN apt-get clean && apt-get update && \
     update-locale LANG="${LANGUAGE}.UTF-8" && \
     apt-get -y autoclean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
 
-ENV NOMACHINE_OS="Linux" \
+ENV NOMACHINE_OS="Arm" \
     NOMACHINE_BUILD="6.9" \
-    NOMACHINE_VERSION="6.9.2_1_amd64" \
-    NOMACHINE_MD5="86fe9a0f9ee06ee6fce41aa36674f727"
+    NOMACHINE_VERSION="6.9.2_3_armhf" \
+    NOMACHINE_MD5="d894085c5ffd0cd1f27dba7a56ce9457"
 
 RUN curl -fSL "https://download.nomachine.com/download/${NOMACHINE_BUILD}/${NOMACHINE_OS}/nomachine_${NOMACHINE_VERSION}.deb" -o nomachine.deb && \
     echo "${NOMACHINE_MD5} *nomachine.deb" | md5sum -c - && \
