@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# @todo Testing on amd processor not working, but works on live arm32v7 processor
+
 dockerImage='test/desktop:arm32v7'
 dockerContainer='test_desktop_arm32v7'
 
