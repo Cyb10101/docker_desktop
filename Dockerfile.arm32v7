@@ -1,7 +1,6 @@
 FROM multiarch/qemu-user-static:x86_64-arm as qemu
 
-# Main
-FROM arm32v7/ubuntu
+FROM arm32v7/ubuntu:20.04
 COPY --from=qemu /usr/bin/qemu-arm-static /usr/bin/
 
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -15,7 +14,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     APPLICATION_GROUP="application" \
     PASSWORD="Admin123!"
 
-RUN apt-get clean && apt-get update && \
+RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
     apt-get install -y \
         curl git rsync sudo supervisor vim \
         locales language-pack-de \
@@ -29,12 +28,12 @@ RUN apt-get clean && apt-get update && \
     apt-get -y autoclean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
 
 ENV NOMACHINE_OS="Arm" \
-    NOMACHINE_BUILD="6.9" \
-    NOMACHINE_VERSION="6.9.2_3_armhf" \
-    NOMACHINE_MD5="d894085c5ffd0cd1f27dba7a56ce9457"
+    NOMACHINE_VERSION="6.11" \
+    NOMACHINE_PACKAGE_NAME="nomachine_6.11.2_1_armhf.deb" \
+    NOMACHINE_MD5="86312dbdd12cffd8566e80f0010c1440"
 
-RUN curl -fSL "https://download.nomachine.com/download/${NOMACHINE_BUILD}/${NOMACHINE_OS}/nomachine_${NOMACHINE_VERSION}.deb" -o nomachine.deb && \
-    echo "${NOMACHINE_MD5} *nomachine.deb" | md5sum -c - && \
+RUN curl -fSL "https://download.nomachine.com/download/${NOMACHINE_VERSION}/Arm/${NOMACHINE_PACKAGE_NAME}" -o nomachine.deb && \
+    echo "${NOMACHINE_MD5} nomachine.deb" | md5sum -c - && \
     dpkg -i nomachine.deb
 
 ADD rootfs/ /
@@ -44,7 +43,7 @@ RUN set -x && \
   /opt/docker/bin/bootstrap.sh
 
 EXPOSE 4000
-EXPOSE 4011-4999
+EXPOSE 4467/udp
 WORKDIR /root
 ENTRYPOINT ["/entrypoint"]
 CMD ["supervisord"]

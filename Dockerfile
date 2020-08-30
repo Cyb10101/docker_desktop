@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
     TIMEZONE="Europe/Berlin" \
@@ -11,7 +11,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     APPLICATION_GROUP="application" \
     PASSWORD="Admin123!"
 
-RUN apt-get clean && apt-get update && \
+RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
     apt-get install -y \
         curl git rsync sudo supervisor vim \
         locales language-pack-de \
@@ -40,7 +40,7 @@ RUN set -x && \
   /opt/docker/bin/bootstrap.sh
 
 EXPOSE 4000
-EXPOSE 4011-4999
+EXPOSE 4467/udp
 WORKDIR /root
 ENTRYPOINT ["/entrypoint"]
 CMD ["supervisord"]
