@@ -30,7 +30,7 @@ ENV NOMACHINE_OS="Linux" \
     NOMACHINE_PACKAGE_NAME="nomachine_6.11.2_1_amd64.deb" \
     NOMACHINE_MD5="d268d38823489c9b3cffd5d618c05b22"
 
-RUN curl -fSL "https://download.nomachine.com/download/${NOMACHINE_VERSION}/Linux/${NOMACHINE_PACKAGE_NAME}" -o nomachine.deb && \
+RUN curl -fSL "https://download.nomachine.com/download/${NOMACHINE_VERSION}/${NOMACHINE_OS}/${NOMACHINE_PACKAGE_NAME}" -o nomachine.deb && \
     echo "${NOMACHINE_MD5} nomachine.deb" | md5sum -c - && \
     dpkg -i nomachine.deb
 
