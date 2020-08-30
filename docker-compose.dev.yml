@@ -13,9 +13,11 @@ services:
       - DISPLAY_WIDTH=1366
       - DISPLAY_HEIGHT=768
       - PASSWORD=Admin123!
-      - NX_PORT=4000
+      - NX_PORT=4001
+    expose:
+      - 4001
     ports:
-      - 4001:4000
+      - 4001:4001
       - 4467:4467/udp
     cap_add:
       - SYS_PTRACE
