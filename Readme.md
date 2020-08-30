@@ -26,3 +26,15 @@ Example mounts:
 ./storage/downloads:/home/application/Downloads
 ./storage/.mozilla:/home/application/.mozilla
 ```
+
+## Troubleshooting
+
+### No xserver running
+
+```bash
+xset q
+# No display found
+
+/etc/NX/nxserver --status
+# Disabled service: nxnode
+```
