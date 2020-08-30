@@ -5,6 +5,7 @@ conky.config = {
     alignment = 'top_right',
     gap_x = 5,
     gap_y = 29,
+    minimum_width = 210,
 
     own_window = true,
     own_window_class = 'Conky',
