@@ -10,8 +10,8 @@ services:
       - ~/projects/docker_desktop/storage/.mozilla:/home/application/.mozilla
 
     environment:
-      - DISPLAY_WIDTH=1280
-      - DISPLAY_HEIGHT=800
+      - DISPLAY_WIDTH=1366
+      - DISPLAY_HEIGHT=768
       - PASSWORD=Admin123!
       - NX_PORT=4000
     ports:
