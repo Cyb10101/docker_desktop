@@ -1,5 +1,4 @@
-# Main
-FROM ubuntu
+FROM ubuntu:16.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
     TIMEZONE="Europe/Berlin" \
@@ -26,12 +25,12 @@ RUN apt-get clean && apt-get update && \
     apt-get -y autoclean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
 
 ENV NOMACHINE_OS="Linux" \
-    NOMACHINE_BUILD="6.9" \
-    NOMACHINE_VERSION="6.9.2_1_amd64" \
-    NOMACHINE_MD5="86fe9a0f9ee06ee6fce41aa36674f727"
+    NOMACHINE_VERSION="6.11" \
+    NOMACHINE_PACKAGE_NAME="nomachine_6.11.2_1_amd64.deb" \
+    NOMACHINE_MD5="d268d38823489c9b3cffd5d618c05b22"
 
-RUN curl -fSL "https://download.nomachine.com/download/${NOMACHINE_BUILD}/${NOMACHINE_OS}/nomachine_${NOMACHINE_VERSION}.deb" -o nomachine.deb && \
-    echo "${NOMACHINE_MD5} *nomachine.deb" | md5sum -c - && \
+RUN curl -fSL "https://download.nomachine.com/download/${NOMACHINE_VERSION}/Linux/${NOMACHINE_PACKAGE_NAME}" -o nomachine.deb && \
+    echo "${NOMACHINE_MD5} nomachine.deb" | md5sum -c - && \
     dpkg -i nomachine.deb
 
 ADD rootfs/ /
