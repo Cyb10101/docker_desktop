@@ -1,4 +1,5 @@
-FROM ubuntu:20.04
+FROM ubuntu:18.04
+# @todo No so nice: ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
     TIMEZONE="Europe/Berlin" \
