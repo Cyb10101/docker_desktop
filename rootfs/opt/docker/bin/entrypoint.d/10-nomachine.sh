@@ -17,3 +17,5 @@ sed -i -r "s/^#?(CreateDisplay).*/\1 1/g" /usr/NX/etc/server.cfg
 sed -i -r "s/^#?(DisplayOwner).*/\1 \"${APPLICATION_USER}\"/g" /usr/NX/etc/server.cfg
 sed -i -r "s/^#?(DisplayGeometry).*/\1 \"${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}\"/g" /usr/NX/etc/server.cfg
 sed -i -r "s/^#?(EnableClipboard).*/\1 both/g" /usr/NX/etc/server.cfg
+sed -i -r "s/^#?(DefaultDesktopCommand).*/\1 \"\/usr\/bin\/X11\/startxfce4\"/g" /usr/NX/etc/node.cfg
+

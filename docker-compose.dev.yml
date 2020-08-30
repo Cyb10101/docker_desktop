@@ -11,12 +11,12 @@ services:
 
     environment:
       - DISPLAY_WIDTH=1280
-      - DISPLAY_HEIGHT=900
+      - DISPLAY_HEIGHT=800
       - PASSWORD=Admin123!
-      - NX_PORT=4001
+      - NX_PORT=4000
     ports:
-      - 4001:4001
-      - 4467:4467
+      - 4001:4000
+      - 4467:4467/udp
     cap_add:
       - SYS_PTRACE
     working_dir: /home/application
