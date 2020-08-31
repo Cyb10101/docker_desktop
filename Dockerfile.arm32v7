@@ -31,7 +31,7 @@ RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
 ENV NOMACHINE_OS="Arm" \
     NOMACHINE_VERSION="6.11" \
     NOMACHINE_PACKAGE_NAME="nomachine_6.11.2_1_armhf.deb" \
-    NOMACHINE_MD5="86312dbdd12cffd8566e80f0010c1440"
+    NOMACHINE_MD5="a9b0ec745583bd81c6746fc3d590b74b"
 
 RUN curl -fSL "https://download.nomachine.com/download/${NOMACHINE_VERSION}/${NOMACHINE_OS}/${NOMACHINE_PACKAGE_NAME}" -o nomachine.deb && \
     echo "${NOMACHINE_MD5} nomachine.deb" | md5sum -c - && \
