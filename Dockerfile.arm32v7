@@ -39,6 +39,13 @@ RUN curl -fSL "https://download.nomachine.com/download/${NOMACHINE_VERSION}/${NO
     echo "${NOMACHINE_MD5} nomachine.deb" | md5sum -c - && \
     dpkg -i nomachine.deb
 
+# Albert Launcher
+RUN curl https://build.opensuse.org/projects/home:manuelschneid3r/public_key | sudo apt-key add - && \
+    echo "deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_$(lsb_release -sr)/ /" > /etc/apt/sources.list.d/home:manuelschneid3r.list && \
+    wget -nv https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_$(lsb_release -sr)/Release.key -O "/etc/apt/trusted.gpg.d/home:manuelschneid3r.asc" && \
+    apt-get update && apt install -y albert && \
+    apt-get -y autoclean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
+
 ADD rootfs/ /
 
 RUN set -x && \
