@@ -1,20 +1,22 @@
-version: '3.5'
+version: '3.8'
 
 services:
   desktop:
-    build: .
-    #image: cyb10101/desktop:latest
-
+    image: cyb10101/desktop:latest
+    hostname: desktop
     volumes:
-      - ~/projects/docker_desktop/storage/downloads:/home/application/Downloads
-      - ~/projects/docker_desktop/storage/.mozilla:/home/application/.mozilla
-
+      - ./storage/downloads:/home/application/Downloads
+      - ./storage/.mozilla:/home/application/.mozilla
     environment:
       - DISPLAY_WIDTH=1366
       - DISPLAY_HEIGHT=768
       - PASSWORD=Admin123!
       - NX_PORT=4000
+    #expose:
+      # For different port than 4000 (NX_PORT)
+      # - 4001
     ports:
+      # Set both same as NX_PORT
       - 4000:4000
       - 4467:4467/udp
     cap_add:

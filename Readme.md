@@ -5,7 +5,7 @@
 
 Required:
 
-Synology: Container mit hoher Priorität ausführen = true
+Synology: Run containers with high priority (German: Container mit hoher Priorität ausführen) = true
 
 ```bash
 --cap-add=SYS_PTRACE
@@ -36,5 +36,8 @@ xset q
 # No display found
 
 /etc/NX/nxserver --status
-# Disabled service: nxnode
+# NX> 111 New connections to NoMachine server are enabled.
+# NX> 162 Enabled service: nxserver.
+# NX> 162 Disabled service: nxnode.
+# NX> 162 Enabled service: nxd.
 ```

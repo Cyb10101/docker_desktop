@@ -1,7 +1,8 @@
 /entrypoints/*
 !/entrypoints/development.sh
 /scripts/*
+/storage
 !/scripts/development_www.php
 !/scripts/development_www.sh
 /.env
-
+/.idea

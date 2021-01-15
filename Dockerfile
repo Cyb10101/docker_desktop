@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-# @todo No so nice: ubuntu:20.04
+# @todo Not so nice: ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
     TIMEZONE="Europe/Berlin" \
@@ -14,10 +14,11 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
     apt-get install -y \
-        curl git rsync sudo supervisor vim \
+        curl wget aria2 git rsync sudo supervisor vim \
         locales language-pack-de \
         xfce4 xfce4-terminal xfce4-goodies conky-all \
         x11vnc xvfb net-tools \
+        gedit vlc \
         firefox firefox-locale-de && \
     apt-get remove -y pm-utils xscreensaver* && \
     echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
@@ -25,14 +26,22 @@ RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
     update-locale LANG="${LANGUAGE}.UTF-8" && \
     apt-get -y autoclean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
 
+# NoMachine
 ENV NOMACHINE_OS="Linux" \
-    NOMACHINE_VERSION="6.11" \
-    NOMACHINE_PACKAGE_NAME="nomachine_6.11.2_1_amd64.deb" \
-    NOMACHINE_MD5="d268d38823489c9b3cffd5d618c05b22"
+    NOMACHINE_VERSION="7.0" \
+    NOMACHINE_PACKAGE_NAME="nomachine_7.0.211_4_amd64.deb" \
+    NOMACHINE_MD5="7608b1b4b7fd9cc993f5eb1601d42882"
 
 RUN curl -fSL "https://download.nomachine.com/download/${NOMACHINE_VERSION}/${NOMACHINE_OS}/${NOMACHINE_PACKAGE_NAME}" -o nomachine.deb && \
     echo "${NOMACHINE_MD5} nomachine.deb" | md5sum -c - && \
     dpkg -i nomachine.deb
+
+# Albert Launcher
+RUN curl https://build.opensuse.org/projects/home:manuelschneid3r/public_key | sudo apt-key add - && \
+    echo "deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_$(lsb_release -sr)/ /" > /etc/apt/sources.list.d/home:manuelschneid3r.list && \
+    wget -nv https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_$(lsb_release -sr)/Release.key -O "/etc/apt/trusted.gpg.d/home:manuelschneid3r.asc" && \
+    apt-get update && apt install -y albert && \
+    apt-get -y autoclean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
 
 ADD rootfs/ /
 
