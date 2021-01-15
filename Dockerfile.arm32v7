@@ -17,10 +17,11 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
     apt-get install -y \
-        curl git rsync sudo supervisor vim \
+        curl wget aria2 git rsync sudo supervisor vim \
         locales language-pack-de \
         xfce4 xfce4-terminal xfce4-goodies conky-all \
         x11vnc xvfb net-tools \
+        gedit vlc \
         firefox firefox-locale-de && \
     apt-get remove -y pm-utils xscreensaver* && \
     echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
@@ -28,10 +29,11 @@ RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
     update-locale LANG="${LANGUAGE}.UTF-8" && \
     apt-get -y autoclean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
 
+# NoMachine
 ENV NOMACHINE_OS="Arm" \
-    NOMACHINE_VERSION="6.11" \
-    NOMACHINE_PACKAGE_NAME="nomachine_6.11.2_1_armhf.deb" \
-    NOMACHINE_MD5="a9b0ec745583bd81c6746fc3d590b74b"
+    NOMACHINE_VERSION="7.0" \
+    NOMACHINE_PACKAGE_NAME="nomachine_7.0.211_1_armhf.deb" \
+    NOMACHINE_MD5="08b64623d6118ecafa134e2ed84aa213"
 
 RUN curl -fSL "https://download.nomachine.com/download/${NOMACHINE_VERSION}/${NOMACHINE_OS}/${NOMACHINE_PACKAGE_NAME}" -o nomachine.deb && \
     echo "${NOMACHINE_MD5} nomachine.deb" | md5sum -c - && \
