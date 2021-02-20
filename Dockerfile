@@ -28,9 +28,9 @@ RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
 
 # NoMachine
 ENV NOMACHINE_OS="Linux" \
-    NOMACHINE_VERSION="7.0" \
-    NOMACHINE_PACKAGE_NAME="nomachine_7.0.211_4_amd64.deb" \
-    NOMACHINE_MD5="7608b1b4b7fd9cc993f5eb1601d42882"
+    NOMACHINE_VERSION="7.1" \
+    NOMACHINE_PACKAGE_NAME="nomachine_7.1.3_1_amd64.deb" \
+    NOMACHINE_MD5="d833ad52f92e5b3cc30c96f12686d97f"
 
 RUN curl -fSL "https://download.nomachine.com/download/${NOMACHINE_VERSION}/${NOMACHINE_OS}/${NOMACHINE_PACKAGE_NAME}" -o nomachine.deb && \
     echo "${NOMACHINE_MD5} nomachine.deb" | md5sum -c - && \
