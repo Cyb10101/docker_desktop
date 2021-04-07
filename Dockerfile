@@ -24,24 +24,25 @@ RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
     echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     echo "${TIMEZONE}" > /etc/timezone && \
     update-locale LANG="${LANGUAGE}.UTF-8" && \
-    apt-get -y autoclean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # NoMachine
 ENV NOMACHINE_OS="Linux" \
-    NOMACHINE_VERSION="7.1" \
-    NOMACHINE_PACKAGE_NAME="nomachine_7.1.3_1_amd64.deb" \
-    NOMACHINE_MD5="d833ad52f92e5b3cc30c96f12686d97f"
+    NOMACHINE_VERSION="7.4" \
+    NOMACHINE_PACKAGE_NAME="nomachine_7.4.1_1_amd64.deb" \
+    NOMACHINE_MD5="ef260cc2f82dfec5e72fac0724b3dd6e"
 
 RUN curl -fSL "https://download.nomachine.com/download/${NOMACHINE_VERSION}/${NOMACHINE_OS}/${NOMACHINE_PACKAGE_NAME}" -o nomachine.deb && \
     echo "${NOMACHINE_MD5} nomachine.deb" | md5sum -c - && \
-    dpkg -i nomachine.deb
+    dpkg -i nomachine.deb && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Albert Launcher
 RUN curl https://build.opensuse.org/projects/home:manuelschneid3r/public_key | sudo apt-key add - && \
     echo "deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_$(lsb_release -sr)/ /" > /etc/apt/sources.list.d/home:manuelschneid3r.list && \
     wget -nv https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_$(lsb_release -sr)/Release.key -O "/etc/apt/trusted.gpg.d/home:manuelschneid3r.asc" && \
     apt-get update && apt install -y albert && \
-    apt-get -y autoclean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ADD rootfs/ /
 
