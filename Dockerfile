@@ -26,15 +26,14 @@ RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
     update-locale LANG="${LANGUAGE}.UTF-8" && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# NoMachine
-ENV NOMACHINE_OS="Linux" \
-    NOMACHINE_VERSION="7.4" \
-    NOMACHINE_PACKAGE_NAME="nomachine_7.4.1_1_amd64.deb" \
-    NOMACHINE_MD5="ef260cc2f82dfec5e72fac0724b3dd6e"
+# NoMachine Linux 64bit - https://www.nomachine.com/download/download&id=2
+ENV NOMACHINE_VERSION="7.5.2_1" \
+    NOMACHINE_MD5="5295f8d17e4b8480da25e211e0b7cb92"
 
-RUN curl -fSL "https://download.nomachine.com/download/${NOMACHINE_VERSION}/${NOMACHINE_OS}/${NOMACHINE_PACKAGE_NAME}" -o nomachine.deb && \
-    echo "${NOMACHINE_MD5} nomachine.deb" | md5sum -c - && \
-    dpkg -i nomachine.deb && \
+RUN NOMACHINE_VERSION_SHORT=`echo ${NOMACHINE_VERSION} | cut -d. -f1-2` && \
+    curl -fSL "https://download.nomachine.com/download/${NOMACHINE_VERSION_SHORT}/Linux/nomachine_${NOMACHINE_VERSION}_amd64.deb" -o /tmp/nomachine.deb && \
+    echo "${NOMACHINE_MD5} /tmp/nomachine.deb" | md5sum -c - && \
+    dpkg -i nomachine.deb && rm /tmp/nomachine.deb && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Albert Launcher
