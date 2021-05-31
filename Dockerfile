@@ -27,8 +27,8 @@ RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # NoMachine Linux 64bit - https://www.nomachine.com/download/download&id=2
-ENV NOMACHINE_VERSION="7.5.2_1" \
-    NOMACHINE_MD5="5295f8d17e4b8480da25e211e0b7cb92"
+ENV NOMACHINE_VERSION="7.6.2_4" \
+    NOMACHINE_MD5="2d990a44595bbb7c38f21e7976ddc4d7"
 
 RUN NOMACHINE_VERSION_SHORT=`echo ${NOMACHINE_VERSION} | cut -d. -f1-2` && \
     curl -fSL "https://download.nomachine.com/download/${NOMACHINE_VERSION_SHORT}/Linux/nomachine_${NOMACHINE_VERSION}_amd64.deb" -o /tmp/nomachine.deb && \
