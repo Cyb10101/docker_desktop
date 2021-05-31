@@ -1,5 +1,4 @@
-FROM ubuntu:18.04
-# @todo Not so nice: ubuntu:20.04
+FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
     TIMEZONE="Europe/Berlin" \
@@ -26,14 +25,14 @@ RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
     update-locale LANG="${LANGUAGE}.UTF-8" && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# NoMachine Linux 64bit - https://www.nomachine.com/download/download&id=2
+# NoMachine Linux 64bit - https://www.nomachine.com/download/download&id=3
 ENV NOMACHINE_VERSION="7.6.2_4" \
-    NOMACHINE_MD5="2d990a44595bbb7c38f21e7976ddc4d7"
+    NOMACHINE_MD5="4fffc2d252868086610b0264c30461bd"
 
 RUN NOMACHINE_VERSION_SHORT=`echo ${NOMACHINE_VERSION} | cut -d. -f1-2` && \
     curl -fSL "https://download.nomachine.com/download/${NOMACHINE_VERSION_SHORT}/Linux/nomachine_${NOMACHINE_VERSION}_amd64.deb" -o /tmp/nomachine.deb && \
     echo "${NOMACHINE_MD5} /tmp/nomachine.deb" | md5sum -c - && \
-    dpkg -i nomachine.deb && rm /tmp/nomachine.deb && \
+    dpkg -i /tmp/nomachine.deb && rm /tmp/nomachine.deb && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Albert Launcher

@@ -1,7 +1,6 @@
 FROM multiarch/qemu-user-static:x86_64-arm as qemu
 
-FROM arm32v7/ubuntu:18.04
-# @todo No so nice: arm32v7/ubuntu:20.04
+FROM arm32v7/ubuntu:20.04
 COPY --from=qemu /usr/bin/qemu-arm-static /usr/bin/
 
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -29,14 +28,14 @@ RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
     update-locale LANG="${LANGUAGE}.UTF-8" && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# NoMachine Linux ARMv7 armhf - https://www.nomachine.com/download/download&id=112&s=ARM
+# NoMachine Linux ARMv7 armhf - https://www.nomachine.com/download/download&id=113&s=ARM
 ENV NOMACHINE_VERSION="7.6.2_3" \
-    NOMACHINE_MD5="8b0a5079bd6ee42c34e8d50b89ffa2b0"
+    NOMACHINE_MD5="0db8daafe0359a594f9a45b5a1c2dd10"
 
 RUN NOMACHINE_VERSION_SHORT=`echo ${NOMACHINE_VERSION} | cut -d. -f1-2` && \
     curl -fSL "https://download.nomachine.com/download/${NOMACHINE_VERSION_SHORT}/Linux/nomachine_${NOMACHINE_VERSION}_amd64.deb" -o /tmp/nomachine.deb && \
     echo "${NOMACHINE_MD5} /tmp/nomachine.deb" | md5sum -c - && \
-    dpkg -i nomachine.deb && rm /tmp/nomachine.deb && \
+    dpkg -i /tmp/nomachine.deb && rm /tmp/nomachine.deb && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Albert Launcher

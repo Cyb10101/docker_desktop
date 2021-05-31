@@ -32,6 +32,7 @@ if [[ ! -f /opt/docker/entrypoint.lock ]]; then
   rsync -a --relative /root/./.config/albert /home/${APPLICATION_USER}/
   rsync -a --relative /root/./.config/autostart /home/${APPLICATION_USER}/
   rsync -a --relative /root/./.config/conky /home/${APPLICATION_USER}/
+  rsync -a --relative /root/./.config/gtk-3.0 /home/${APPLICATION_USER}/
 
   chown -R "$APPLICATION_USER":"$APPLICATION_GROUP" /home/$APPLICATION_USER
 fi
