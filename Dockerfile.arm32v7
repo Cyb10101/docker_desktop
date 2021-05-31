@@ -40,9 +40,9 @@ RUN NOMACHINE_OS="Arm" && NOMACHINE_ARCHITECTURE="armhf" && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Albert Launcher
-RUN curl -fsSL https://build.opensuse.org/projects/home:manuelschneid3r/public_key | sudo apt-key add - && \
-    echo "deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_$(lsb_release -sr)/ /" > /etc/apt/sources.list.d/home:manuelschneid3r.list && \
-    wget -nv https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_$(lsb_release -sr)/Release.key -O "/etc/apt/trusted.gpg.d/home:manuelschneid3r.asc" && \
+RUN curl -fsSL https://build.opensuse.org/projects/home:manuelschneid3r/public_key | apt-key add - && \
+    echo "deb https://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_$(lsb_release -sr)/ /" > /etc/apt/sources.list.d/home:manuelschneid3r.list && \
+    curl -fsSL "https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_$(lsb_release -sr)/Release.key" -o "/etc/apt/trusted.gpg.d/home:manuelschneid3r.asc" && \
     apt-get update && apt install -y albert && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
