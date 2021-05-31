@@ -29,8 +29,9 @@ RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
 ENV NOMACHINE_VERSION="7.6.2_4" \
     NOMACHINE_MD5="4fffc2d252868086610b0264c30461bd"
 
-RUN NOMACHINE_VERSION_SHORT=`echo ${NOMACHINE_VERSION} | cut -d. -f1-2` && \
-    curl -fsSL "https://download.nomachine.com/download/${NOMACHINE_VERSION_SHORT}/Linux/nomachine_${NOMACHINE_VERSION}_amd64.deb" -o /tmp/nomachine.deb && \
+RUN NOMACHINE_OS="Linux" && NOMACHINE_ARCHITECTURE="amd64" && \
+    NOMACHINE_VERSION_SHORT=`echo ${NOMACHINE_VERSION} | cut -d. -f1-2` && \
+    curl -fsSL "https://download.nomachine.com/download/${NOMACHINE_VERSION_SHORT}/${NOMACHINE_OS}/nomachine_${NOMACHINE_VERSION}_${NOMACHINE_ARCHITECTURE}.deb" -o /tmp/nomachine.deb && \
     echo "${NOMACHINE_MD5} /tmp/nomachine.deb" | md5sum -c - && \
     dpkg -i /tmp/nomachine.deb && rm /tmp/nomachine.deb && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
