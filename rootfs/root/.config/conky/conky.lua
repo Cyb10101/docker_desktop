@@ -4,12 +4,12 @@ conky.config = {
 
     alignment = 'top_right',
     gap_x = 5,
-    gap_y = 36,
+    gap_y = 5,
     minimum_width = 210,
 
     own_window = true,
     own_window_class = 'Conky',
-    own_window_type = 'normal',
+    own_window_type = 'desktop',
     own_window_argb_visual = false,
     own_window_transparent = false,
     own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
