@@ -1,0 +1,6 @@
+[Added Associations]
+image/jpeg=org.kde.gwenview.desktop;ristretto.desktop;firefox.desktop;
+image/png=org.kde.gwenview.desktop;ristretto.desktop;firefox.desktop;
+image/gif=org.kde.gwenview.desktop;ristretto.desktop;firefox.desktop;
+image/bmp=org.kde.gwenview.desktop;ristretto.desktop;firefox.desktop;
+image/svg+xml=org.kde.gwenview.desktop;ristretto.desktop;firefox.desktop;
