@@ -55,9 +55,20 @@ ${font sans-serif:bold:size=8}${color #008FCF}${stippled_hr}
 
 -- Devices
 conky.text = conky.text .. [[
-${font sans-serif:bold:size=8}${color #FFA300}DATA DISKS ${color slate grey}${hr 2}${font sans-serif:normal:size=8}
+${font sans-serif:bold:size=8}${color #FFA300}DISKS ${color slate grey}${hr 2}${font sans-serif:normal:size=8}
 ${color #FFFFFF}System${alignr}Used: ${fs_used /} | Free: ${fs_free /}
 ${color #888888}${fs_bar 6 /}
 ${color #FFFFFF}Downloads${alignr}Used: ${fs_used /root/Downloads} | Free: ${fs_free /root/Downloads}
 ${color #00AF00}${fs_bar 6 /root/Downloads}
+]];
+
+-- Hardware
+conky.text = conky.text .. [[
+${font sans-serif:bold:size=8}${color #FFA300}HARDWARE ${color slate grey}${hr 2}${font sans-serif:normal:size=8}
+${color #FFFFFF}CPU${alignr} ${cpu}%
+${color #FFFFFF}${cpubar 6 /}
+${color #FFFFFF}RAM${alignr} ${mem} / ${memmax}     ${memperc}%
+${color #ddaa00}${membar 6 /}
+${color #FFFFFF}Swap${alignr} ${swap} / ${swapmax}     ${swapperc}%
+${color #888888}${swapbar 6 /}
 ]];
