@@ -49,7 +49,7 @@ conky.config = {
 
 -- Title
 conky.text = [[
-${font Ubuntu:style=bold:size=11}${color #FFFFFF}${alignc}${execi 30 lsb_release -ds} (${execi 30 lsb_release -cs})
+${font Ubuntu:style=bold:size=11}${color #FFFFFF}${alignc}${execi 600 lsb_release -ds} (${execi 600 lsb_release -cs})
 ${font sans-serif:bold:size=8}${color #008FCF}${stippled_hr}
 ]];
 
