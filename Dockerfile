@@ -26,9 +26,9 @@ RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
     update-locale LANG="${LANGUAGE}.UTF-8" && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# NoMachine Linux 64bit - https://www.nomachine.com/download/download&id=3
-ENV NOMACHINE_VERSION="7.6.2_4" \
-    NOMACHINE_MD5="4fffc2d252868086610b0264c30461bd"
+# NoMachine Linux 64bit Debian Package - https://www.nomachine.com/download/linux&id=1
+ENV NOMACHINE_VERSION="7.7.4_1" \
+    NOMACHINE_MD5="c8a455a9636520cfa7ac64504eaffc84"
 
 RUN NOMACHINE_OS="Linux" && NOMACHINE_ARCHITECTURE="amd64" && \
     NOMACHINE_VERSION_SHORT=`echo ${NOMACHINE_VERSION} | cut -d. -f1-2` && \

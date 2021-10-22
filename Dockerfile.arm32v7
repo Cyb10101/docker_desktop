@@ -29,9 +29,9 @@ RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
     update-locale LANG="${LANGUAGE}.UTF-8" && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# NoMachine Linux ARMv7 armhf - https://www.nomachine.com/download/download&id=113&s=ARM
-ENV NOMACHINE_VERSION="7.6.2_3" \
-    NOMACHINE_MD5="0db8daafe0359a594f9a45b5a1c2dd10"
+# NoMachine Linux ARMv7 armhf Debian Package - https://www.nomachine.com/download/linux&id=30&s=ARM
+ENV NOMACHINE_VERSION="7.7.4_1" \
+    NOMACHINE_MD5="eaf7a008f3e7a10edf67443cd5d2483e"
 
 RUN NOMACHINE_OS="Arm" && NOMACHINE_ARCHITECTURE="armhf" && \
     NOMACHINE_VERSION_SHORT=`echo ${NOMACHINE_VERSION} | cut -d. -f1-2` && \
