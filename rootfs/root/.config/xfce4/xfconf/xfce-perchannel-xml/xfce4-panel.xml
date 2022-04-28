@@ -24,10 +24,7 @@
     </property>
   </property>
   <property name="plugins" type="empty">
-    <property name="plugin-1" type="string" value="applicationsmenu">
-      <property name="show-button-title" type="bool" value="false"/>
-      <property name="button-icon" type="string" value="xfce4-whiskermenu"/>
-    </property>
+    <property name="plugin-1" type="string" value="whiskermenu"/>
     <property name="plugin-2" type="string" value="tasklist">
       <property name="show-labels" type="bool" value="false"/>
       <property name="flat-buttons" type="bool" value="true"/>
@@ -60,7 +57,7 @@
     </property>
     <property name="plugin-11" type="string" value="launcher">
       <property name="items" type="array">
-        <value type="string" value="/usr/share/applications/exo-file-manager.desktop"/>
+        <value type="string" value="/usr/share/applications/thunar.desktop"/>
       </property>
     </property>
     <property name="plugin-12" type="string" value="launcher">

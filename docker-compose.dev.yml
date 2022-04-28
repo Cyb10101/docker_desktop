@@ -21,23 +21,3 @@ services:
     cap_add:
       - SYS_PTRACE
     working_dir: /home/application
-
-  desktop2:
-    build: .
-    hostname: desktop2
-    volumes:
-      - ~/Downloads/public:/home/application/Desktop/public
-      - ./storage/downloads:/home/application/Downloads
-    environment:
-      - DISPLAY_WIDTH=1366
-      - DISPLAY_HEIGHT=768
-      - PASSWORD=Admin123!
-      - NX_PORT=4002
-    expose:
-      - 4002
-    ports:
-      - 4002:4002
-      - 4468:4467/udp
-    cap_add:
-      - SYS_PTRACE
-    working_dir: /home/application

@@ -125,22 +125,22 @@ symfonyClearCache() {
 
 deployImages() {
   # Default: 32 bit & 64 bit
-  docker pull ubuntu:20.04
+  docker pull ubuntu:22.04
   docker build --no-cache --file Dockerfile --tag cyb10101/desktop:latest .
   docker push cyb10101/desktop:latest
 
   # Arm32v7
   docker pull multiarch/qemu-user-static:x86_64-arm
-  docker pull arm32v7/ubuntu:20.04
+  docker pull arm32v7/ubuntu:22.04
   docker run --rm --privileged multiarch/qemu-user-static:register --reset
   docker build --no-cache --file Dockerfile.arm32v7 --tag cyb10101/desktop:arm32v7 .
   docker push cyb10101/desktop:arm32v7
 
   # Clean up
   docker rmi $(docker images --filter=reference="cyb10101/desktop:arm32v7" -q)
-  docker rmi $(docker images --filter=reference="ubuntu:20.04" -q)
+  docker rmi $(docker images --filter=reference="ubuntu:22.04" -q)
   docker rmi $(docker images --filter=reference="multiarch/qemu-user-static:x86_64-arm" -q)
-  docker rmi $(docker images --filter=reference="arm32v7/ubuntu:20.04" -q)
+  docker rmi $(docker images --filter=reference="arm32v7/ubuntu:22.04" -q)
 }
 
 runDeploy() {

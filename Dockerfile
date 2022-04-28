@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
     TIMEZONE="Europe/Berlin" \
@@ -14,7 +14,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
     apt-get install -y \
         software-properties-common \
-        curl wget aria2 git rsync sudo supervisor vim \
+        curl wget aria2 git rsync sudo supervisor vim jq \
         locales language-pack-de \
         xfce4 xfce4-terminal xfce4-goodies conky-all \
         x11vnc xvfb net-tools \
@@ -27,8 +27,8 @@ RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # NoMachine Linux 64bit Debian Package - https://www.nomachine.com/download/linux&id=1
-ENV NOMACHINE_VERSION="7.7.4_1" \
-    NOMACHINE_MD5="c8a455a9636520cfa7ac64504eaffc84"
+ENV NOMACHINE_VERSION="7.9.2_1" \
+    NOMACHINE_MD5="a24aa0b09543d207034e8198972cbd24"
 
 RUN NOMACHINE_OS="Linux" && NOMACHINE_ARCHITECTURE="amd64" && \
     NOMACHINE_VERSION_SHORT=`echo ${NOMACHINE_VERSION} | cut -d. -f1-2` && \
@@ -45,6 +45,12 @@ RUN curl -fsSL https://build.opensuse.org/projects/home:manuelschneid3r/public_k
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ADD rootfs/ /
+
+# Install Firefox without Snap - Note: /etc/apt/preferences.d/mozilla-firefox
+RUN add-apt-repository -y ppa:mozillateam/ppa && \
+    echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:$(lsb_release -sc)";' | tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox && \
+    apt-get update && apt -y --allow-downgrades install firefox && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN set -x && \
   chmod +x /opt/docker/bin/* && \
