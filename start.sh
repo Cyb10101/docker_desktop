@@ -169,7 +169,7 @@ runDeploy() {
 
     # Task 2: Deploy as user in container (Docker)
     startFunction start
-    startFunction exec-web ./start.sh deployDirect
+    startFunction exec-app ./start.sh deployDirect
 
     # Task 2: Deploy as user in system (Switch from root to user)
     #if [ -z "${RUN_AS_USERNAME}" ]; then echo 'Error variable RUN_AS_USERNAME is empty!'; exit 1; fi
@@ -210,19 +210,19 @@ startFunction() {
             dockerComposeCmd down --remove-orphans
         ;;
         login-root)
-            dockerComposeCmd exec web bash
+            dockerComposeCmd exec app bash
         ;;
         login)
             startFunction bash
         ;;
         bash)
-            dockerComposeCmd exec -u ${APPLICATION_USER} web bash
+            dockerComposeCmd exec -u ${APPLICATION_USER} app bash
         ;;
         zsh)
-            dockerComposeCmd exec -u ${APPLICATION_USER} web zsh
+            dockerComposeCmd exec -u ${APPLICATION_USER} app zsh
         ;;
-        exec-web)
-            dockerComposeCmd exec -u ${APPLICATION_USER} web "${@:2}"
+        exec-app)
+            dockerComposeCmd exec -u ${APPLICATION_USER} app "${@:2}"
         ;;
         deploy-images)
           deployImages
