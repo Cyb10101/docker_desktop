@@ -26,9 +26,9 @@ RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
     update-locale LANG="${LANGUAGE}.UTF-8" && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# NoMachine Linux 64bit Debian Package - https://www.nomachine.com/download/linux&id=1
-ENV NOMACHINE_VERSION="7.9.2_1" \
-    NOMACHINE_MD5="a24aa0b09543d207034e8198972cbd24"
+# NoMachine Linux 64bit Debian Package - https://downloads.nomachine.com/linux/?id=1
+ENV NOMACHINE_VERSION="8.1.2_1" \
+    NOMACHINE_MD5="d550a2ffa5ef7c685e62f25aa6ca6966"
 
 RUN NOMACHINE_OS="Linux" && NOMACHINE_ARCHITECTURE="amd64" && \
     NOMACHINE_VERSION_SHORT=`echo ${NOMACHINE_VERSION} | cut -d. -f1-2` && \
@@ -44,13 +44,15 @@ RUN curl -fsSL https://build.opensuse.org/projects/home:manuelschneid3r/public_k
     apt-get update && apt-get install -y albert && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-ADD rootfs/ /
-
-# Install Firefox without Snap - Note: /etc/apt/preferences.d/mozilla-firefox
+# Install Firefox without Snap
+ADD rootfs/etc/apt/preferences.d/mozilla-firefox /etc/apt/preferences.d/mozilla-firefox
 RUN add-apt-repository -y ppa:mozillateam/ppa && \
     echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:$(lsb_release -sc)";' | tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox && \
     apt-get update && apt -y --allow-downgrades install firefox && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
+
+ADD rootfs/ /
+RUN chown root:root /usr/local/bin/create-temp
 
 RUN set -x && \
   chmod +x /opt/docker/bin/* && \
