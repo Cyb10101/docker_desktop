@@ -27,8 +27,8 @@ RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # NoMachine Linux 64bit Debian Package - https://downloads.nomachine.com/linux/?id=1
-ENV NOMACHINE_VERSION="8.1.2_1" \
-    NOMACHINE_MD5="d550a2ffa5ef7c685e62f25aa6ca6966"
+ENV NOMACHINE_VERSION="8.2.3_4" \
+    NOMACHINE_MD5="f54fadba321d34e9745d25ec156bdacc"
 
 RUN NOMACHINE_OS="Linux" && NOMACHINE_ARCHITECTURE="amd64" && \
     NOMACHINE_VERSION_SHORT=`echo ${NOMACHINE_VERSION} | cut -d. -f1-2` && \
