@@ -27,21 +27,14 @@ RUN apt-get clean && apt-get update && apt-get -y dist-upgrade && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # NoMachine Linux 64bit Debian Package - https://downloads.nomachine.com/linux/?id=1
-ENV NOMACHINE_VERSION="8.2.3_4" \
-    NOMACHINE_MD5="f54fadba321d34e9745d25ec156bdacc"
+ENV NOMACHINE_VERSION="8.3.1_1" \
+    NOMACHINE_MD5="099ae6fa38c816a9b0e18bfafe69a6e2"
 
 RUN NOMACHINE_OS="Linux" && NOMACHINE_ARCHITECTURE="amd64" && \
     NOMACHINE_VERSION_SHORT=`echo ${NOMACHINE_VERSION} | cut -d. -f1-2` && \
     curl -fsSL "https://download.nomachine.com/download/${NOMACHINE_VERSION_SHORT}/${NOMACHINE_OS}/nomachine_${NOMACHINE_VERSION}_${NOMACHINE_ARCHITECTURE}.deb" -o /tmp/nomachine.deb && \
     echo "${NOMACHINE_MD5} /tmp/nomachine.deb" | md5sum -c - && \
     dpkg -i /tmp/nomachine.deb && rm /tmp/nomachine.deb && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Albert Launcher
-RUN curl -fsSL https://build.opensuse.org/projects/home:manuelschneid3r/public_key | apt-key add - && \
-    echo "deb https://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_$(lsb_release -sr)/ /" > /etc/apt/sources.list.d/home:manuelschneid3r.list && \
-    curl -fsSL "https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_$(lsb_release -sr)/Release.key" -o "/etc/apt/trusted.gpg.d/home:manuelschneid3r.asc" && \
-    apt-get update && apt-get install -y albert && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Firefox without Snap

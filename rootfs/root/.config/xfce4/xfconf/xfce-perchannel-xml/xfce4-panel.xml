@@ -47,7 +47,6 @@
       </property>
       <property name="names-ordered" type="array">
         <value type="string" value="networkmanager applet"/>
-        <value type="string" value="albert"/>
         <value type="string" value="nxclient.bin"/>
       </property>
     </property>

@@ -28,7 +28,6 @@ if [[ ! -f /opt/docker/entrypoint.lock ]]; then
   cp /root/.shell-methods.sh /home/$APPLICATION_USER/
   cp /root/.bashrc /home/$APPLICATION_USER/
   mkdir -p /home/${APPLICATION_USER}/.local/share/applications
-  rsync -a --relative /root/./.config/albert /home/${APPLICATION_USER}/
   rsync -a --relative /root/./.config/autostart /home/${APPLICATION_USER}/
   rsync -a --relative /root/./.config/conky /home/${APPLICATION_USER}/
   rsync -a --relative /root/./.config/gtk-3.0 /home/${APPLICATION_USER}/
