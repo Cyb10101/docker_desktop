@@ -1,5 +1,6 @@
 /storage
 /storage2
+/.docker
 /.idea
 /.env
-
+/.git

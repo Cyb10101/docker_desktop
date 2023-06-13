@@ -8,7 +8,7 @@ APPLICATION_GID=${APPLICATION_GID:-1000}
 DISPLAY_WIDTH=${DISPLAY_WIDTH:-1280}
 DISPLAY_HEIGHT=${DISPLAY_HEIGHT:-768}
 
-if [[ ! -f /opt/docker/entrypoint.lock ]]; then
+if [ ! -f /opt/docker/entrypoint.lock ]; then
   groupmod -g $((APPLICATION_GID + 1)) nx
 fi
 

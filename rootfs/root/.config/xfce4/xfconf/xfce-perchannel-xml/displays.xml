@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <channel name="displays" version="1.0">
   <property name="Default" type="empty">
     <property name="nxoutput0" type="string" value="nxoutput0">

@@ -1,4 +1,7 @@
-FROM ubuntu:22.04
+FROM multiarch/qemu-user-static:x86_64-aarch64 as qemu
+
+FROM arm64v8/ubuntu:22.04
+COPY --from=qemu /usr/bin/qemu-aarch64-static /usr/bin/
 
 ENV DEBIAN_FRONTEND=noninteractive \
     TIMEZONE="Europe/Berlin" \
@@ -11,10 +14,10 @@ ENV DEBIAN_FRONTEND=noninteractive \
     APPLICATION_GROUP="application" \
     PASSWORD="Admin123!"
 
-# NoMachine Linux 64bit Debian Package - https://downloads.nomachine.com/linux/?id=1
-ENV NOMACHINE_OS="Linux" NOMACHINE_ARCHITECTURE="amd64" \
+# NoMachine Linux ARMv7 armhf Debian Package - https://downloads.nomachine.com/linux/?id=30&distro=Arm
+ENV NOMACHINE_OS="Arm" NOMACHINE_ARCHITECTURE="arm64" \
     NOMACHINE_VERSION="8.5.3_1" \
-    NOMACHINE_MD5="91e3e70e3de7bc062151b9b771838f93"
+    NOMACHINE_MD5="2291f8d8ec76f0a914285acaaa93e34d"
 
 ADD rootfs/opt/docker/bin/bootstrap.sh /opt/docker/bin/bootstrap.sh
 ADD rootfs/etc/apt/preferences.d/mozilla-firefox /etc/apt/preferences.d/mozilla-firefox

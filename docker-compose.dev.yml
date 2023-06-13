@@ -2,10 +2,11 @@ version: '3.8'
 
 services:
   app:
+    image: desktop
     build: .
     hostname: desktop
     volumes:
-      - ~/Downloads/public:/home/application/Desktop/public
+      #- ~/Downloads/public:/home/application/Desktop/public
       - ./storage/downloads:/home/application/Downloads
       - ./storage/.mozilla:/home/application/.mozilla
     environment:
