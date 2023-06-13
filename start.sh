@@ -145,10 +145,10 @@ symfonyClearCache() {
 }
 
 deployImages() {
-  # Default: 32 bit & 64 bit
+  # Default: 64 bit
   docker pull ubuntu:22.04
-  docker build --no-cache --file Dockerfile --tag cyb10101/desktop:latest .
-  docker push cyb10101/desktop:latest
+  docker build --no-cache --file Dockerfile --tag cyb10101/desktop:amd64 .
+  docker push cyb10101/desktop:amd64
 
   # Arm64v8
   docker pull multiarch/qemu-user-static:x86_64-aarch64
@@ -163,6 +163,14 @@ deployImages() {
   docker run --rm --privileged multiarch/qemu-user-static:register --reset
   docker build --no-cache --file Dockerfile.arm32v7 --tag cyb10101/desktop:arm32v7 .
   docker push cyb10101/desktop:arm32v7
+
+  # Create manifest
+  docker manifest create cyb10101/desktop:latest \
+    --amend cyb10101/desktop:amd64 \
+    --amend cyb10101/desktop:arm64v8 \
+    --amend cyb10101/desktop:arm32v7
+
+  docker manifest push cyb10101/desktop:latest
 
   # Clean up
   set +e
