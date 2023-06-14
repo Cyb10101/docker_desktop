@@ -166,23 +166,30 @@ deployImages() {
 
   # Create manifest
   docker manifest create cyb10101/desktop:latest \
-    --amend cyb10101/desktop:amd64 \
-    --amend cyb10101/desktop:arm64v8 \
-    --amend cyb10101/desktop:arm32v7
+    --amend docker.io/cyb10101/desktop:amd64 \
+    --amend docker.io/cyb10101/desktop:arm64v8 \
+    --amend docker.io/cyb10101/desktop:arm32v7
 
-  docker manifest push cyb10101/desktop:latest
+  docker manifest push --purge cyb10101/desktop:latest
 
   # Clean up
   set +e
-  docker rmi $(docker images --filter=reference="cyb10101/desktop:arm64v8" -q)
-  docker rmi $(docker images --filter=reference="cyb10101/desktop:arm32v7" -q)
+  read -p 'Remove ARM images? [y/N] ' -n 1 -r; echo ''
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    docker rmi $(docker images --filter=reference="cyb10101/desktop:arm64v8" -q)
+    docker rmi $(docker images --filter=reference="cyb10101/desktop:arm32v7" -q)
 
-  docker rmi $(docker images --filter=reference="multiarch/qemu-user-static:x86_64-aarch64" -q)
-  docker rmi $(docker images --filter=reference="multiarch/qemu-user-static:x86_64-arm" -q)
+    docker rmi $(docker images --filter=reference="multiarch/qemu-user-static:x86_64-aarch64" -q)
+    docker rmi $(docker images --filter=reference="multiarch/qemu-user-static:x86_64-arm" -q)
 
-  docker rmi $(docker images --filter=reference="arm64v8/ubuntu:22.04" -q)
-  docker rmi $(docker images --filter=reference="arm32v7/ubuntu:22.04" -q)
-  docker rmi $(docker images --filter=reference="ubuntu:22.04" -q)
+    docker rmi $(docker images --filter=reference="arm64v8/ubuntu:22.04" -q)
+    docker rmi $(docker images --filter=reference="arm32v7/ubuntu:22.04" -q)
+  fi
+
+  read -p 'Remove Ubuntu images? [y/N] ' -n 1 -r; echo ''
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    docker rmi $(docker images --filter=reference="ubuntu:22.04" -q)
+  fi
   set -e
 }
 
