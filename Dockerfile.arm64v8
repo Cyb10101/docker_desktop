@@ -3,6 +3,7 @@ FROM multiarch/qemu-user-static:x86_64-aarch64 as qemu
 FROM arm64v8/ubuntu:22.04
 COPY --from=qemu /usr/bin/qemu-aarch64-static /usr/bin/
 
+RUN mkdir -p /opt/docker && echo "arm64v8" > /opt/docker/architecture
 ENV DEBIAN_FRONTEND=noninteractive \
     TIMEZONE="Europe/Berlin" \
     LANGUAGE="de_DE" \

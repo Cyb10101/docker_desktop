@@ -1,5 +1,6 @@
 FROM ubuntu:22.04
 
+RUN mkdir -p /opt/docker && echo "amd64" > /opt/docker/architecture
 ENV DEBIAN_FRONTEND=noninteractive \
     TIMEZONE="Europe/Berlin" \
     LANGUAGE="de_DE" \
