@@ -14,8 +14,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 # NoMachine Linux 64bit Debian Package - https://downloads.nomachine.com/linux/?id=1
 ENV NOMACHINE_OS="Linux" NOMACHINE_ARCHITECTURE="amd64" \
-    NOMACHINE_VERSION="8.10.1_1" \
-    NOMACHINE_MD5="2367db57367e9b6cc316e72b437bffe6"
+    NOMACHINE_VERSION="8.11.3_4" \
+    NOMACHINE_MD5="1a128694ee00853e59149dc8b2af1baf"
 
 ADD rootfs/opt/docker/bin/bootstrap.sh /opt/docker/bin/bootstrap.sh
 ADD rootfs/etc/apt/preferences.d/mozilla-firefox /etc/apt/preferences.d/mozilla-firefox
