@@ -61,6 +61,7 @@ apt-get -y remove pm-utils xscreensaver*
 
 # Install Firefox without Snap
 apt-get -y --allow-downgrades install firefox
+apt-get -y install speech-dispatcher
 
 # Install Nomachine
 NOMACHINE_VERSION_SHORT=`echo ${NOMACHINE_VERSION} | cut -d. -f1-2`
