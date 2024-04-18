@@ -9,6 +9,11 @@ APPLICATION_GID=${APPLICATION_GID:-1000}
 APPLICATION_USER=${APPLICATION_USER:-application}
 APPLICATION_GROUP=${APPLICATION_GROUP:-application}
 
+setTerminalTitle() {
+    echo -ne "\033]0;${1}\007"
+    #echo -e "\033]2;${1}\007"
+}
+
 loadEnvironmentVariables() {
     if [ -f ".env" ]; then
       source .env
@@ -146,11 +151,13 @@ symfonyClearCache() {
 
 deployImages() {
   # Default: 64 bit
+  setTerminalTitle "Build default (32/64 bit) ..."
   docker pull ubuntu:22.04
   docker build --no-cache --file Dockerfile --tag cyb10101/desktop:amd64 .
   docker push cyb10101/desktop:amd64
 
   # Arm64v8
+  setTerminalTitle "Build Arm64v8 ..."
   docker pull multiarch/qemu-user-static:x86_64-aarch64
   docker pull arm64v8/ubuntu:22.04
   docker run --rm --privileged multiarch/qemu-user-static:register --reset
@@ -158,6 +165,7 @@ deployImages() {
   docker push cyb10101/desktop:arm64v8
 
   # Arm32v7
+  setTerminalTitle "Build Arm32v7 ..."
   docker pull multiarch/qemu-user-static:x86_64-arm
   docker pull arm32v7/ubuntu:22.04
   docker run --rm --privileged multiarch/qemu-user-static:register --reset
@@ -171,6 +179,7 @@ deployImages() {
     --amend docker.io/cyb10101/desktop:arm32v7
 
   docker manifest push --purge cyb10101/desktop:latest
+  setTerminalTitle ""
 
   # Clean up
   set +e
