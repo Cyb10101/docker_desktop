@@ -42,33 +42,44 @@ conky.config = {
     show_graph_scale = false,
     show_graph_range = false,
 
-    -- # Print everything to stdout/stderr?
+    -- Print everything to stdout/stderr?
     out_to_console = false,
     out_to_stderr = false,
+
+    template0 = [[${color #FFFFFF}\2${alignr} ${if_mounted \1}${font Monospace:normal:size=8}${fs_used \1} | ${fs_free \1} ${font sans-serif:normal:size=8}
+${color \3}${fs_bar 6 \1}${else}not mounted${endif}]],
+    template1 = [[${color #FFFFFF}\2${alignr} ${if_mounted \1}${font Monospace:normal:size=8}Used: ${fs_used \1} | Free: ${fs_free \1} ${font sans-serif:normal:size=8}
+${color \3}${fs_bar 6 \1}${else}not mounted${endif}]],
 };
 
 -- Title
 conky.text = [[
-${font Ubuntu:style=bold:size=11}${color #FFFFFF}${alignc}${execi 600 lsb_release -ds} (${execi 600 lsb_release -cs})
+${font Ubuntu:style=bold:size=11}${color #FFFFFF}${alignc}${execi 86400 lsb_release -ds}
 ${font sans-serif:bold:size=8}${color #008FCF}${stippled_hr}
 ]];
 
 -- Devices
 conky.text = conky.text .. [[
 ${font sans-serif:bold:size=8}${color #FFA300}DISKS ${color slate grey}${hr 2}${font sans-serif:normal:size=8}
-${color #FFFFFF}System${alignr}Used: ${fs_used /} | Free: ${fs_free /}
-${color #888888}${fs_bar 6 /}
-${color #FFFFFF}Downloads${alignr}Used: ${fs_used /root/Downloads} | Free: ${fs_free /root/Downloads}
-${color #00AF00}${fs_bar 6 /root/Downloads}
+${template0 / System #888888}
+${template0 /root/Downloads Downloads #00AF00}
 ]];
 
 -- Hardware
 conky.text = conky.text .. [[
 ${font sans-serif:bold:size=8}${color #FFA300}HARDWARE ${color slate grey}${hr 2}${font sans-serif:normal:size=8}
-${color #FFFFFF}CPU${alignr} ${cpu}%
+${color #FFFFFF}CPU${alignr}${font Monospace:normal:size=8} ${cpu}%${font sans-serif:normal:size=8}
 ${color #FFFFFF}${cpubar 6 /}
-${color #FFFFFF}RAM${alignr} ${mem} / ${memmax}     ${memperc}%
+${color #FFFFFF}RAM${alignr}${font Monospace:normal:size=8} ${mem} / ${memmax} | ${memperc}%${font sans-serif:normal:size=8}
 ${color #ddaa00}${membar 6 /}
-${color #FFFFFF}Swap${alignr} ${swap} / ${swapmax}     ${swapperc}%
+${color #FFFFFF}Swap${alignr}${font Monospace:normal:size=8} ${swap} / ${swapmax} | ${swapperc}%${font sans-serif:normal:size=8}
 ${color #888888}${swapbar 6 /}
 ]];
+
+-- Other
+conky.text = conky.text .. [[
+${font sans-serif:bold:size=8}${color #FFA300}OTHER ${color slate grey}${hr 2}${font sans-serif:normal:size=8}
+${color #FFFFFF}Kernel:${alignr}${execi 86400 uname -r}
+${color #FFFFFF}Codename:${alignr}${execi 86400 lsb_release -cs}
+]];
+
