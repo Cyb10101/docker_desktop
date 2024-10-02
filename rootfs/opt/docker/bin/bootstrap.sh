@@ -19,14 +19,19 @@ apt-get clean
 
 # Install add-apt-repository
 apt-get update
-apt-get -y install software-properties-common
+apt-get -y install software-properties-common wget
 
 # Add repositories
 add-apt-repository -y --no-update universe
 
-# Add repository to install Firefox without Snap
-add-apt-repository -y --no-update ppa:mozillateam/ppa
-echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:$(lsb_release -sc)";' | tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
+# Add repository to install Firefox
+wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | tee /etc/apt/keyrings/packages.mozilla.org.asc 1>/dev/null
+fingerprint=$(gpg -n -q --import --import-options import-show /etc/apt/keyrings/packages.mozilla.org.asc | awk '/pub/{getline; gsub(/^ +| +$/,""); print $0}')
+if [ "${fingerprint}" != "35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3" ]; then
+    echo "Verification failed: The fingerprint (${fingerprint}) does not match\!"; exit 1
+fi
+echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | tee -a /etc/apt/sources.list.d/mozilla.list 1>/dev/null
+printf "Package: *\nPin: origin packages.mozilla.org\nPin-Priority: 1001" | tee /etc/apt/preferences.d/mozilla 1>/dev/null
 
 # Update packages
 apt-get update
@@ -47,7 +52,7 @@ visudo --check /etc/sudoers
 
 # Install apps
 apt-get -y install \
-    curl wget aria2 git rsync supervisor vim \
+    curl aria2 git rsync supervisor vim \
     htop net-tools \
     jq python3 python3-pip \
     conky-all gedit mpv
@@ -59,9 +64,8 @@ pip3 install yq
 apt-get -y install xfce4 xfce4-terminal xfce4-goodies gnome-backgrounds
 apt-get -y remove pm-utils xscreensaver*
 
-# Install Firefox without Snap
-apt-get -y --allow-downgrades install firefox
-apt-get -y install speech-dispatcher
+# Install Firefox
+apt-get -y install firefox speech-dispatcher
 
 # Install Nomachine
 NOMACHINE_VERSION_SHORT=`echo ${NOMACHINE_VERSION} | cut -d. -f1-2`

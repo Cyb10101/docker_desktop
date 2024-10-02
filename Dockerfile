@@ -18,7 +18,6 @@ ENV NOMACHINE_OS="Linux" NOMACHINE_ARCHITECTURE="amd64" \
     NOMACHINE_MD5="35e0549cb28f59d385d040e20532bb27"
 
 ADD rootfs/opt/docker/bin/bootstrap.sh /opt/docker/bin/bootstrap.sh
-ADD rootfs/etc/apt/preferences.d/mozilla-firefox /etc/apt/preferences.d/mozilla-firefox
 ADD rootfs/usr/local/bin/create-temp /usr/local/bin/create-temp
 RUN chmod +x /opt/docker/bin/bootstrap.sh && /opt/docker/bin/bootstrap.sh
 
