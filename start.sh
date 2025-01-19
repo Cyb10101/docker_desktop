@@ -159,7 +159,7 @@ deployImages() {
   # Arm64v8
   setTerminalTitle "Build Arm64v8 ..."
   docker pull multiarch/qemu-user-static:x86_64-aarch64
-  docker pull arm64v8/ubuntu:22.04
+  docker pull --platform linux/arm64/v8 arm64v8/ubuntu:22.04
   docker run --rm --privileged multiarch/qemu-user-static:register --reset
   docker build --no-cache --file Dockerfile.arm64v8 --tag cyb10101/desktop:arm64v8 .
   docker push cyb10101/desktop:arm64v8
@@ -167,7 +167,7 @@ deployImages() {
   # Arm32v7
   setTerminalTitle "Build Arm32v7 ..."
   docker pull multiarch/qemu-user-static:x86_64-arm
-  docker pull arm32v7/ubuntu:22.04
+  docker pull --platform linux/arm/v7 arm32v7/ubuntu:22.04
   docker run --rm --privileged multiarch/qemu-user-static:register --reset
   docker build --no-cache --file Dockerfile.arm32v7 --tag cyb10101/desktop:arm32v7 .
   docker push cyb10101/desktop:arm32v7
