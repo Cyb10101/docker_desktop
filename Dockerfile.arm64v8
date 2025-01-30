@@ -17,8 +17,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 # NoMachine Linux ARMv8 aarch64 Debian Package - https://downloads.nomachine.com/linux/?id=30&distro=Arm
 ENV NOMACHINE_OS="Arm" NOMACHINE_ARCHITECTURE="arm64" \
-    NOMACHINE_VERSION="8.15.3_1" \
-    NOMACHINE_MD5="801defd47475b37b60fd02332d61d611"
+    NOMACHINE_VERSION="8.16.1_1" \
+    NOMACHINE_MD5="488a120c57a1b88ae0886e5ce0483ff6"
 
 ADD rootfs/opt/docker/bin/bootstrap.sh /opt/docker/bin/bootstrap.sh
 ADD rootfs/usr/local/bin/create-temp /usr/local/bin/create-temp
